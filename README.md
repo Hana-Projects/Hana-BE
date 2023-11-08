@@ -2,6 +2,7 @@
 파이널 프로젝트 백엔드 레포
 
 ## 😎 Git Commit Convention
+
 ### Commit Type
 - feat : 새로운 기능을 추가한 경우
 - fix : 버그를 고친 경우
@@ -15,4 +16,9 @@
 - !HOTFIX : 급하게 치명적인 버그를 고치는 경우
 - rename : 파일/폴더를 수정 또는 옮기는 경우
 - remove : 파일을 삭제한 경우
+
+## Server IP 주소
+
+
+## Server Cloud Architecture
 
