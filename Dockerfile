@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jdk-alpine AS builder
 
-WORKDIR /app
+WORKDIR /workspace/app
 
 COPY gradle gradle
 
@@ -18,8 +18,8 @@ RUN ./gradlew clean build
 
 FROM eclipse-temurin:17-jdk-alpine
 
-WORKDIR /app
+WORKDIR /workspace/app
 
-COPY --from=builder ./app/build/libs/*.jar app.jar
+COPY --from=builder ./workspace/app/build/libs/*.jar app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
