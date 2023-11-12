@@ -1,25 +1,9 @@
-FROM eclipse-temurin:17-jdk-alpine AS builder
-
-WORKDIR /workspace/app
-
-COPY gradle gradle
-
-COPY gradlew .
-
-COPY build.gradle build.gradle
-
-COPY settings.gradle .
-
-COPY src src
-
-RUN chmod +x ./gradlew
-
-RUN ./gradlew clean build
-
 FROM eclipse-temurin:17-jdk-alpine
 
-WORKDIR /workspace/app
+WORKDIR usr/src/app
 
-COPY --from=builder ./workspace/app/build/libs/*.jar app.jar
+ARG JAR_FILE=build/libs/bookdiary-0.0.1-SNAPSHOT.jar
 
-ENTRYPOINT ["java","-jar","app.jar"]
+COPY ${JAR_FILE} app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
