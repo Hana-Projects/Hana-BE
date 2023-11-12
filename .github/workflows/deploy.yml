@@ -28,25 +28,20 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # - name: application.properties
-    #   run: |
-    #     mkdir -p src/main/resources
-    #     touch ./src/main/resources/application.properties
-    #     echo "${{ secrets.APPLICATION }}" >> ./src/main/resources/application.properties
+    - name: application.properties
+      run: |
+        mkdir -p src/main/resources
+        touch ./src/main/resources/application.properties
+        echo "${{ secrets.APPLICATION }}" >> ./src/main/resources/application.properties
 
-    # - name: Setup Gradle
-    #   uses: gradle/gradle-build-action@v2
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
 
     - name: Make gradlew executable
       run: chmod +x ./gradlew
       
-    # - name: build gradle
-    #   run: ./gradlew clean build --warning-mode all
-
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
+    - name: build gradle
+      run: ./gradlew clean build --warning-mode all
         
     - name: Docker Login
       uses: docker/login-action@v2
@@ -64,11 +59,3 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
-
-    
-        
-
-
-    
-        
- 
