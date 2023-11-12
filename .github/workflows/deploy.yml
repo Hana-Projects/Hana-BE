@@ -34,11 +34,11 @@ jobs:
         touch ./src/main/resources/application.properties
         echo "${{ secrets.APPLICATION }}" >> ./src/main/resources/application.properties
 
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-
     - name: Make gradlew executable
       run: chmod +x ./gradlew
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
       
     - name: build gradle
       run: ./gradlew clean build --warning-mode all
