@@ -9,7 +9,11 @@ on:
 
 permissions:
   contents: read
-
+  actions: read
+  
+env:
+  IMAGE_NAME: hana-docker-image:latest
+  
 jobs:
   build:
     runs-on: ubuntu-latest
