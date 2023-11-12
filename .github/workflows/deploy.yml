@@ -41,7 +41,7 @@ jobs:
       run: chmod +x ./gradlew
       
     - name: build gradle
-      run: ./gradlew build --warning-mode all
+      run: ./gradlew clean build --warning-mode all
         
     - name: Docker Login
       uses: docker/login-action@v2
