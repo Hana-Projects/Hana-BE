@@ -36,6 +36,7 @@ jobs:
 
       - name: make .env for docker-compose.yml
         run: |
+          touch .env
           echo "DOCKER_USERNAME=$DOCKER_USERNAME" >> .env
           echo "IMAGE_NAME=$IMAGE_NAME" >> .env
 
@@ -79,7 +80,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: ${{ secrets.APPLICATION_NAME }}
           environment_name: ${{ secrets.ENVIRONMENT_NAME }}
-          version_label: trade-market-${{steps.current-time.outputs.formattedTime}}
+          version_label: hana-project-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: docker-compose.yml
           wait_for_environment_recovery: 300
