@@ -10,10 +10,7 @@ on:
 permissions:
   contents: read
   actions: read
-  
-env:
-  IMAGE_NAME: hana-docker-image:latest
-  
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -58,4 +55,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.IMAGE_NAME }}
