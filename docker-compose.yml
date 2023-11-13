@@ -1,7 +1,7 @@
 version: "3"
 services:
   api-server:
-    image: "dkwkghkdlxld2/hana-docker-image"
+    image: "${DOCKER_USERNAME}/${IMAGE_NAME}"
     ports:
       - "80:5000"
     restart: "always"

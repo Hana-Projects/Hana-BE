@@ -10,6 +10,10 @@ permissions:
   contents: read
   actions: read
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,8 +36,8 @@ jobs:
 
       - name: make .env for docker-compose.yml
         run: |
-          echo "DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env
-          echo "IMAGE_NAME=${{ secrets.IMAGE_NAME }}" >> .env
+          echo "DOCKER_USERNAME=$DOCKER_USERNAME" >> .env
+          echo "IMAGE_NAME=$IMAGE_NAME" >> .env
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
