@@ -1,6 +1,6 @@
 package com.hanabridge.api.customer.domain;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.hanabridge.api.security.dto.CustomUserDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "CUSTOMER")
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // TODO: 접근 권한 protected로 하는 이유 정리할 것
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Customer {
 
@@ -29,4 +29,13 @@ public class Customer {
     private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    public CustomUserDetails toUserDetails() {
+        return CustomUserDetails.builder()
+                .id(id)
+                .username(username)
+                .password(password)
+                .build();
+    }
+
 }
