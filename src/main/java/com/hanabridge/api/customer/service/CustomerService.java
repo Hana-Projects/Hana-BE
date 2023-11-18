@@ -12,10 +12,8 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-//    @Transactional
-//    public void register(CustomerRegisterRequest request) {
-//        customerRepository.save(
-//
-//        )
-//    }
+    @Transactional
+    public void register(CustomerRegisterRequest request) {
+        customerRepository.save(request.toEntity());
+    }
 }
