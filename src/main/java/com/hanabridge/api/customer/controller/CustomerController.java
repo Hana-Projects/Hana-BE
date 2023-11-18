@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
 
 
-//    @PostMapping("/register")
-//    public ResponseEntity<ApiSuccessResponse<Void>> register(@RequestBody CustomerRegisterRequest request){
-//
-//    }
+        ApiSuccessResponse<Void> response = new ApiSuccessResponse<>(201, "회원 가입 성공", null);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
 }
