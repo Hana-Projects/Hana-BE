@@ -24,9 +24,6 @@ public class TransactionService {
                 .map(Account::toAccountResponse)
                 .toList();
 
-        return AccountListResponse.builder()
-            .total(accountList.size())
-            .accountResponses(accountList)
-            .build();
+        return AccountListResponse.fromList(accountList.size(), accountList);
     }
 }

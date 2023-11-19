@@ -19,4 +19,11 @@ public class AccountListResponse {
     private int total;
     @Schema(description = "소유한 계좌 각각의 정보(계좌 종류, 계좌번호, 잔액) 리스트")
     private List<AccountResponse> accountResponses;
+
+    public static AccountListResponse fromList(int total, List<AccountResponse> list) {
+        return AccountListResponse.builder()
+            .total(total)
+            .accountResponses(list)
+            .build();
+    }
 }
