@@ -32,27 +32,27 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement((sessionManagement) ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable);
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement((sessionManagement) ->
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable);
 
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/error","/api/**").permitAll()
-                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                        .anyRequest().denyAll());
+            .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/error", "/health", "/api/**").permitAll()
+                .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+                .anyRequest().denyAll());
 
         http
-                .addFilterBefore(new CustomAuthenticationFilter(customAuthenticationProvider)
-                        , UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new CustomAuthenticationFilter(customAuthenticationProvider)
+                , UsernamePasswordAuthenticationFilter.class);
 
         http
-                .exceptionHandling((exceptionHandling) ->
-                        exceptionHandling.authenticationEntryPoint(customAuthenticationEntryPoint)
-                                .accessDeniedHandler(customAccessDeniedHandler));
+            .exceptionHandling((exceptionHandling) ->
+                exceptionHandling.authenticationEntryPoint(customAuthenticationEntryPoint)
+                    .accessDeniedHandler(customAccessDeniedHandler));
 
         return http.build();
     }
@@ -74,11 +74,11 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(
-                        "/api/register",
-                        "/swagger-ui/**",
-                        "/v3/api-docs/**",
-                        "/swagger-resources/**",
-                        "/api-docs/**");
+            .requestMatchers(
+                "/api/register",
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/swagger-resources/**",
+                "/api-docs/**");
     }
 }
