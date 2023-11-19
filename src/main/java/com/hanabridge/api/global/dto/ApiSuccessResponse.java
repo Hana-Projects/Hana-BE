@@ -1,7 +1,6 @@
 package com.hanabridge.api.global.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.hanabridge.api.transaction.dto.AccountListResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +27,6 @@ public class ApiSuccessResponse<T> {
     }
 
     public static <T> ApiSuccessResponse<T> success200(String message, T data) {
-        return new ApiSuccessResponse<>(201, message, data);
+        return new ApiSuccessResponse<>(200, message, data);
     }
 }
