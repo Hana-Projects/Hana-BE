@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AccountResponse {
 
+    @Schema(description = "계좌 ID(primary key) 값")
+    private Long accountId;
     @Schema(description = "계좌 종류 타입", examples = {"DEPOSITANDWITHDRAW=입출금", "SAVING=예금", "FUND=펀드"})
     private AccountCode accountCode;
     @Schema(description = "계좌 번호", example = "000-000000-00000")
