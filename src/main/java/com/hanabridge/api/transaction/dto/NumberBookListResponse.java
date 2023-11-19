@@ -3,11 +3,10 @@ package com.hanabridge.api.transaction.dto;
 import com.hanabridge.api.transaction.domain.BankCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Schema(name = "연락처 조회 model")
+@Schema(name = "연락처 목록 조회 model")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

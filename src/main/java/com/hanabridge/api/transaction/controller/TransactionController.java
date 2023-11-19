@@ -5,6 +5,7 @@ import com.hanabridge.api.global.dto.ApiSuccessResponse;
 import com.hanabridge.api.security.dto.CustomUserDetails;
 import com.hanabridge.api.transaction.dto.AccountListResponse;
 import com.hanabridge.api.transaction.dto.NumberBookListResponse;
+import com.hanabridge.api.transaction.dto.NumberRemitRequest;
 import com.hanabridge.api.transaction.dto.RemitRequest;
 import com.hanabridge.api.transaction.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +45,7 @@ public class TransactionController {
                 transactionService.getAccountList(userDetails.getId())));
     }
 
-    @Operation(summary = "송금 API", description = "고객 계좌 정보와 보낼 정보(계좌번호,은행,금액)를 입력하고 호출하는 API")
+    @Operation(summary = "계좌 송금 API", description = "고객 계좌 정보와 보낼 정보(계좌번호,은행,금액)를 입력하고 호출하는 API")
     @ApiResponses({
         @ApiResponse(
             responseCode = "200",
@@ -69,7 +70,7 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.OK).body(ApiSuccessResponse.success200("송금 성공"));
     }
 
-    @Operation(summary = "연락처 조회 API", description = "고객의 연락처에 존재하는 다른 고객 정보를 조회")
+    @Operation(summary = "연락처 목록 조회 API", description = "고객의 연락처에 존재하는 다른 고객 정보 목록을 조회")
     @GetMapping("/numbers")
     public ResponseEntity<ApiSuccessResponse<List<NumberBookListResponse>>> getNumberList(
         @AuthenticationPrincipal CustomUserDetails userDetails) {
@@ -77,5 +78,31 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.OK)
             .body(ApiSuccessResponse.success200("연락처 조회 성공",
                 transactionService.getNumberList(userDetails.getId())));
+    }
+
+    @Operation(summary = "연락처 송금 API", description = "연락처 정보를 이용하여 송금하는 API")
+    @ApiResponses({
+        @ApiResponse(
+            responseCode = "200",
+            description = "송금 성공",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schemaProperties = {
+                @SchemaProperty(name = "code", schema = @Schema(type = "Integer", example = "200")),
+                @SchemaProperty(name = "message", schema = @Schema(type = "String", example = "송금 성공"))
+            })),
+        @ApiResponse(
+            responseCode = "400",
+            description = "잔액이 부족",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(
+                implementation = ApiErrorResponse.class
+            )))
+    })
+    @PostMapping("/remit/number")
+    public ResponseEntity<ApiSuccessResponse<Void>> numberRemit(
+        @RequestBody NumberRemitRequest request) {
+
+        transactionService.numberRemit(request);
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ApiSuccessResponse.success200("연락처로 송금 성공"));
     }
 }
