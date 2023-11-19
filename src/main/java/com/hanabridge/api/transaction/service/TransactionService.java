@@ -6,15 +6,15 @@ import com.hanabridge.api.transaction.domain.Account;
 import com.hanabridge.api.transaction.dto.AccountListResponse;
 import com.hanabridge.api.transaction.dto.AccountResponse;
 import com.hanabridge.api.transaction.dto.NumberBookListResponse;
+import com.hanabridge.api.transaction.dto.NumberRemitRequest;
 import com.hanabridge.api.transaction.dto.RemitRequest;
 import com.hanabridge.api.transaction.repository.AccountRepository;
 import com.hanabridge.api.transaction.repository.NumberBookRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -56,4 +56,18 @@ public class TransactionService {
         return numberBookRepository.getNumberList(id);
 
     }
+
+    @Transactional
+    public void numberRemit(NumberRemitRequest request) {
+        //출금
+        accountRepository.findById(request.getAccountId())
+            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
+            .withdraw(request.getAmount());
+        //입금
+        accountRepository.findByAccountNumber(request.getToAccountNumber())
+            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
+            .deposit(request.getAmount());
+
+    }
+
 }
