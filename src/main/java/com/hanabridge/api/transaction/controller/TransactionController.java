@@ -58,4 +58,13 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.OK).body(ApiSuccessResponse.success200("송금 성공"));
     }
 
+    @Operation(summary = "연락처 조회 API", description = "고객의 연락처에 존재하는 다른 고객 정보를 조회")
+    @GetMapping("/numbers")
+    public ResponseEntity<ApiSuccessResponse<List<NumberBookListResponse>>> getNumberList(
+        @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ApiSuccessResponse.success200("연락처 조회 성공",
+                transactionService.getNumberList(userDetails.getId())));
+    }
 }

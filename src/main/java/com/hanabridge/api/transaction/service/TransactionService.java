@@ -5,10 +5,13 @@ import com.hanabridge.api.global.exception.DataNotFoundException;
 import com.hanabridge.api.transaction.domain.Account;
 import com.hanabridge.api.transaction.dto.AccountListResponse;
 import com.hanabridge.api.transaction.dto.AccountResponse;
+import com.hanabridge.api.transaction.dto.NumberBookListResponse;
 import com.hanabridge.api.transaction.dto.RemitRequest;
 import com.hanabridge.api.transaction.repository.AccountRepository;
+import com.hanabridge.api.transaction.repository.NumberBookRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +19,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TransactionService {
 
     private final AccountRepository accountRepository;
+    private final NumberBookRepository numberBookRepository;
 
     @Transactional
     public AccountListResponse getAccountList(Long id) {
@@ -42,6 +47,13 @@ public class TransactionService {
         accountRepository.findByAccountNumber(request.getAccountNumber())
             .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
             .deposit(request.getAmount());
+
+    }
+
+    @Transactional
+    public List<NumberBookListResponse> getNumberList(Long id) {
+
+        return numberBookRepository.getNumberList(id);
 
     }
 }
