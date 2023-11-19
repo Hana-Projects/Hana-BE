@@ -23,6 +23,10 @@ public class ApiSuccessResponse<T> {
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private T data;
 
+    public static ApiSuccessResponse<Void> success200(String message) {
+        return new ApiSuccessResponse<>(200, message, null);
+    }
+
     public static <T> ApiSuccessResponse<T> success200(String message, T data) {
         return new ApiSuccessResponse<>(201, message, data);
     }
