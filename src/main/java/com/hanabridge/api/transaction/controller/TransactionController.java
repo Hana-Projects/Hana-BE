@@ -1,8 +1,10 @@
 package com.hanabridge.api.transaction.controller;
 
+import com.hanabridge.api.global.dto.ApiErrorResponse;
 import com.hanabridge.api.global.dto.ApiSuccessResponse;
 import com.hanabridge.api.security.dto.CustomUserDetails;
 import com.hanabridge.api.transaction.dto.AccountListResponse;
+import com.hanabridge.api.transaction.dto.NumberBookListResponse;
 import com.hanabridge.api.transaction.dto.RemitRequest;
 import com.hanabridge.api.transaction.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +12,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,14 +45,21 @@ public class TransactionController {
     }
 
     @Operation(summary = "송금 API", description = "고객 계좌 정보와 보낼 정보(계좌번호,은행,금액)를 입력하고 호출하는 API")
-    @ApiResponse(
-        responseCode = "200",
-        description = "송금 성공",
-        content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schemaProperties = {
-            @SchemaProperty(name = "code", schema = @Schema(type = "Integer", example = "200")),
-            @SchemaProperty(name = "message", schema = @Schema(type = "String", example = "송금 성공"))
-        })
-    )
+    @ApiResponses({
+        @ApiResponse(
+            responseCode = "200",
+            description = "송금 성공",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schemaProperties = {
+                @SchemaProperty(name = "code", schema = @Schema(type = "Integer", example = "200")),
+                @SchemaProperty(name = "message", schema = @Schema(type = "String", example = "송금 성공"))
+            })),
+        @ApiResponse(
+            responseCode = "400",
+            description = "잔액이 부족",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(
+                implementation = ApiErrorResponse.class
+            )))
+    })
     @PostMapping("/remit/account")
     public ResponseEntity<ApiSuccessResponse<Void>> remit(
         @AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody RemitRequest request) {
