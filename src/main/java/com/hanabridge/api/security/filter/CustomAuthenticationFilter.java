@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class CustomAuthenticationFilter extends OncePerRequestFilter {
 
-    private ProviderManager providerManager;
+    private final ProviderManager providerManager;
 
     public CustomAuthenticationFilter(AuthenticationProvider authenticationProvider){
         providerManager = new ProviderManager(authenticationProvider);
