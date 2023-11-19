@@ -23,4 +23,10 @@ public class NumberBook {
     @ManyToOne
     @JoinColumn(name = "TO_CUSTOMER_ID", nullable = false)
     private Customer toCustomer;
+
+    @Column(name = "PHONE_NUMBER", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "NUMBER_NAME", nullable = false)
+    private String numberName;
 }

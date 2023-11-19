@@ -12,4 +12,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleDataNotFoundException(CommonException exception) {
         return ApiErrorResponse.fromErrorCode(exception.getErrorCode());
     }
+
+    @ExceptionHandler(InValidException.class)
+    public ResponseEntity<ApiErrorResponse> handleInValidExcepion(CommonException exception) {
+        return ApiErrorResponse.fromErrorCode(exception.getErrorCode());
+    }
 }
