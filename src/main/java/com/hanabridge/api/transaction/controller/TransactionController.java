@@ -44,7 +44,7 @@ public class TransactionController {
                 transactionService.getAccountList(userDetails.getId())));
     }
 
-    @Operation(summary = "송금 API", description = "고객 계좌 정보와 보낼 정보(계좌번호,은행,금액)를 입력하고 호출하는 API")
+    @Operation(summary = "계좌 송금 API", description = "고객 계좌 정보와 보낼 정보(계좌번호,은행,금액)를 입력하고 호출하는 API")
     @ApiResponses({
         @ApiResponse(
             responseCode = "200",
@@ -69,7 +69,7 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.OK).body(ApiSuccessResponse.success200("송금 성공"));
     }
 
-    @Operation(summary = "연락처 조회 API", description = "고객의 연락처에 존재하는 다른 고객 정보를 조회")
+    @Operation(summary = "연락처 목록 조회 API", description = "고객의 연락처에 존재하는 다른 고객 정보 목록을 조회")
     @GetMapping("/numbers")
     public ResponseEntity<ApiSuccessResponse<List<NumberBookListResponse>>> getNumberList(
         @AuthenticationPrincipal CustomUserDetails userDetails) {
