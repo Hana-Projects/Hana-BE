@@ -1,6 +1,8 @@
 package com.hanabridge.api.transaction.domain;
 
 import com.hanabridge.api.customer.domain.Customer;
+import com.hanabridge.api.global.code.ErrorCode;
+import com.hanabridge.api.global.exception.InValidException;
 import com.hanabridge.api.transaction.dto.AccountResponse;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,9 +39,21 @@ public class Account {
 
     public AccountResponse toAccountResponse() {
         return AccountResponse.builder()
+            .accountId(id)
             .accountCode(accountCode)
             .accountNumber(accountNumber)
             .balance(balance)
             .build();
+    }
+
+    public void withdraw(Long amount) {
+        if (balance < amount) {
+            throw new InValidException(ErrorCode.BALANCE_NOT_ENOUGH);
+        }
+        balance -= amount;
+    }
+
+    public void deposit(Long amount) {
+        balance += amount;
     }
 }
