@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "유저 API", description = "유저 관련 API")
-@RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
 public class CustomerController {
@@ -41,4 +40,8 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<ApiSuccessResponse<Void>> login(){
+        return ResponseEntity.ok(ApiSuccessResponse.success200("로그인 성공"));
+    }
 }
