@@ -11,15 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerRegisterRequest {
+
     @Schema(name = "유저 id", example = "haha123")
     String username;
     @Schema(name = "패스워드", example = "123")
     String password;
 
-    public Customer toEntity() {
+    public Customer toEntity(String encodePassword) {
         return Customer.builder()
-                .username(this.username)
-                .password(this.password)
-                .build();
+            .username(this.username)
+            .password(encodePassword)
+            .build();
     }
 }
