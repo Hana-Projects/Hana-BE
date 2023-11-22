@@ -5,6 +5,8 @@ import com.hanabridge.api.security.filter.CustomAuthenticationProvider;
 import com.hanabridge.api.security.handler.CustomAccessDeniedHandler;
 import com.hanabridge.api.security.handler.CustomAuthenticationEntryPoint;
 import jakarta.servlet.DispatcherType;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -56,6 +61,17 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+
+        String idForEncode = "bcrypt";
+        Map encoders = new HashMap<>();
+        encoders.put(idForEncode, new BCryptPasswordEncoder());
+
+        return new DelegatingPasswordEncoder(idForEncode, encoders);
+    }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
