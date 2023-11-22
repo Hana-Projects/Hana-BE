@@ -60,7 +60,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void unsuccessfulAuthentication(HttpServletRequest request,
         HttpServletResponse response, AuthenticationException failed)
         throws IOException, ServletException {
-        super.unsuccessfulAuthentication(request, response, failed);
+        this.getFailureHandler().onAuthenticationFailure(request, response, failed);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         String password = request.getParameter(getPasswordParameter());
 
-        if (password == null) {
-            throw new AuthenticationServiceException("패스워드를 입력하세요");
+        if (password == null || password.isBlank()) {
+            throw new AuthenticationServiceException("비밀번호를 입력하세요");
         }
         return password.trim();
     }
@@ -79,8 +79,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         String username = request.getParameter(getUsernameParameter());
 
-        if (username == null) {
-            throw new AuthenticationServiceException("비밀번호를 입력하세요");
+        if (username == null || username.isBlank()) {
+            throw new AuthenticationServiceException("아이디를 입력하세요");
         }
         return username.trim();
     }
