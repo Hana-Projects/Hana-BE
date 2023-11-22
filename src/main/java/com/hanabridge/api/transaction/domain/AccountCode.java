@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum AccountCode {
-    DEPOSITANDWITHDRAW, SAVING, FUND
+    입출금,예금,펀드
 }
