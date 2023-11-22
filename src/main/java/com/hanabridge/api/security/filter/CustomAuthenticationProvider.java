@@ -5,6 +5,7 @@ import com.hanabridge.api.global.exception.DataNotFoundException;
 import com.hanabridge.api.security.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -25,7 +26,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         UserDetails findUserDetails = customUserDetailsService
                 .loadUserByUsername(authentication.getPrincipal().toString());
         if (!Objects.equals(authentication.getCredentials().toString(), findUserDetails.getPassword())) {
-            throw new DataNotFoundException(ErrorCode.PASSWORD_NOT_MATCH);
+            throw new AuthenticationServiceException("비밀번호가 일치하지 않습니다.");
         } else {
             return new UsernamePasswordAuthenticationToken(findUserDetails, null, null);
         }
