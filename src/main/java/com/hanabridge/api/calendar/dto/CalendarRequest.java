@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CalendarRequest {
 
-    @Parameter(name = "연도", description = "조회하고 싶은 년도", required = true)
+    @Parameter(name = "year", description = "조회하고 싶은 년도", required = true)
     private Integer year;
 
-    @Parameter(name = "월", description = "조회하고 싶은 월", required = true)
+    @Parameter(name = "month", description = "조회하고 싶은 월", required = true)
     private Integer month;
 
-    @Parameter(name = "일", description = "조회하고 싶은 일", required = true)
+    @Parameter(name = "day", description = "조회하고 싶은 일", required = true)
     private Integer day;
 }
