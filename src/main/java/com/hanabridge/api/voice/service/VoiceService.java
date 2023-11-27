@@ -26,6 +26,7 @@ public class VoiceService {
     private final RemitAccountGuideRepository remitAccountGuideRepository;
     private final RemitPhoneGuideRepository remitPhoneGuideRepository;
 
+    @Transactional
     public VoiceResponse getInitGuide(VoiceRequest request) {
 
         if (isRemit(request.getUserVoice())) {
@@ -37,7 +38,7 @@ public class VoiceService {
         }
         throw new DataNotFoundException(ErrorCode.GUIDE_NOT_FOUND);
     }
-
+    @Transactional
     public GuideResponse getGuide(GuideRequest request) {
 
         if (isRemit(request.getVoiceCode()) && request.getRemitCode() == RemitCode.NOTDECIDE) {
