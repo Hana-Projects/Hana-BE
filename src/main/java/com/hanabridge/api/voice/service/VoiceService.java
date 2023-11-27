@@ -16,6 +16,7 @@ import com.hanabridge.api.voice.repository.RemitCommonGuideRepository;
 import com.hanabridge.api.voice.repository.RemitPhoneGuideRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class VoiceService {
 
         if (isRemit(request.getUserVoice())) {
 
-            return remitCommonGuideRepository.findById(1L)
+            return remitCommonGuideRepository.findFirstByOrderByIdAsc()
                 .map(RemitCommonGuide::toVoiceResponse)
                 .orElseThrow(() -> new DataNotFoundException(ErrorCode.GUIDE_NOT_FOUND));
 
