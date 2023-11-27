@@ -2,9 +2,12 @@ name: Java CI/CD with Gradle
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
+      - dev
   pull_request:
-    branches: [ "dev" ]
+    branches:
+      - dev
 
 permissions:
   contents: read
@@ -34,11 +37,11 @@ jobs:
           touch ./src/main/resources/application.properties
           echo "${{ secrets.APPLICATION }}" >> ./src/main/resources/application.properties
 
-#      - name: make .env for docker-compose.yml
-#        run: |
-#          touch .env
-#          echo "DOCKER_USERNAME=$DOCKER_USERNAME" >> .env
-#          echo "IMAGE_NAME=$IMAGE_NAME" >> .env
+      #      - name: make .env for docker-compose.yml
+      #        run: |
+      #          touch .env
+      #          echo "DOCKER_USERNAME=$DOCKER_USERNAME" >> .env
+      #          echo "IMAGE_NAME=$IMAGE_NAME" >> .env
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
