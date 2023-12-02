@@ -10,6 +10,7 @@ import com.hanabridge.api.global.code.ErrorCode;
 import com.hanabridge.api.global.exception.DataNotFoundException;
 import com.hanabridge.api.global.exception.OpenApiException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
@@ -36,26 +37,31 @@ public class CalendarService {
         List<CalendarResponse> aptResponse = null;
         List<CalendarResponse> urbtyOfctlResponse = null;
 
-        urbtyOfctlResponse = callUrbtyOfctlInfo().stream()
-            .filter((urbtyOfctlDataResponse) ->
-                LocalDate.parse(urbtyOfctlDataResponse.getReceiptEndDate())
-                    .isAfter(LocalDate.of(request.getYear(), request.getMonth(), request.getDay())))
+//        urbtyOfctlResponse = callUrbtyOfctlInfo().stream()
+//            .filter((urbtyOfctlDataResponse) ->
+//                LocalDate.parse(urbtyOfctlDataResponse.getReceiptEndDate())
+//                    .isAfter(LocalDate.of(request.getYear(), request.getMonth(), request.getDay())))
+//            .limit(3)
+//            .map(UrbtyOfctlDataResponse::toCalendarResponse)
+//            .toList();
+
+        // if (urbtyOfctlResponse.size() < 3) {
+        List<APTDataResponse> response = callAPTInfo();
+        Collections.shuffle(response);
+        log.info("APT Data Response size=={}", response.size());
+        aptResponse = response.stream()
+            .filter((aptDataResponse -> LocalDate.parse(aptDataResponse.getReceiptEndDate())
+                .isAfter(
+                    LocalDate.of(request.getYear(), request.getMonth(), request.getDay()))))
+            //.limit(3 - urbtyOfctlResponse.size())
             .limit(3)
-            .map(UrbtyOfctlDataResponse::toCalendarResponse)
+            .map(APTDataResponse::toCalendarResponse)
             .toList();
 
-        if (urbtyOfctlResponse.size() < 3) {
-            aptResponse = callAPTInfo().stream()
-                .filter((aptDataResponse -> LocalDate.parse(aptDataResponse.getReceiptEndDate())
-                    .isAfter(
-                        LocalDate.of(request.getYear(), request.getMonth(), request.getDay()))))
-                .limit(3 - urbtyOfctlResponse.size())
-                .map(APTDataResponse::toCalendarResponse)
-                .toList();
-
-            return Stream.concat(urbtyOfctlResponse.stream(), aptResponse.stream()).toList();
-        }
-        return urbtyOfctlResponse;
+        //return Stream.concat(urbtyOfctlResponse.stream(), aptResponse.stream()).toList();
+        return aptResponse;
+        // }
+        //return urbtyOfctlResponse;
     }
 
     private List<APTDataResponse> callAPTInfo() {
@@ -102,6 +108,7 @@ public class CalendarService {
             .fromHttpUrl(url)
             .queryParam("page", 1)
             .queryParam("perPage", 1780)
+            .queryParam("cond[SUBSCRPT_AREA_CODE_NM::EQ]", "서울")
             .queryParam("serviceKey", serviceKey)
             .build();
     }
