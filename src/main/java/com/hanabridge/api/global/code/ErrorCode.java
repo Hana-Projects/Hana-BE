@@ -16,8 +16,8 @@ public enum ErrorCode {
     BALANCE_NOT_ENOUGH(HttpStatus.BAD_REQUEST, "잔액이 충분하지 않습니다."),
     OPENAPI_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "open api 호출 시 에러 발생하였습니다."),
     HOME_INFO_NOT_FOUND(HttpStatus.INTERNAL_SERVER_ERROR, "불러온 청약 정보가 존재하지 않습니다."),
-    GUIDE_NOT_FOUND(HttpStatus.BAD_REQUEST,"안내를 찾을 수 없습니다."),
-    VOICE_CODE_NOT_FOUND(HttpStatus.NOT_FOUND,"일치하는 음성 코드가 존재하지 않습니다.");
+    GUIDE_NOT_FOUND(HttpStatus.BAD_REQUEST, "해석할 수 없는 음성입니다. 음성을 다시 입력하세요."),
+    VOICE_CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 음성 코드가 존재하지 않습니다.");
 
     private HttpStatus httpStatus;
     private String message;
