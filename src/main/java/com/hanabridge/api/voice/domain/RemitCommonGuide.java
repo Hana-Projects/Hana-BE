@@ -29,9 +29,17 @@ public class RemitCommonGuide {
     @Column(name = "GUIDE")
     private String guide;
 
-    public VoiceResponse toVoiceResponse() {
+    public VoiceResponse toRemitVoiceResponse() {
         return VoiceResponse.builder()
             .voiceCode(VoiceCode.REMIT)
+            .guide(guide)
+            .index(0L)
+            .build();
+    }
+
+    public VoiceResponse toItemVoiceResponse() {
+        return VoiceResponse.builder()
+            .voiceCode(VoiceCode.ITEM)
             .guide(guide)
             .index(0L)
             .build();

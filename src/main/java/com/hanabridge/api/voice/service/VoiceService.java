@@ -32,9 +32,13 @@ public class VoiceService {
         if (isRemit(request.getUserVoice())) {
 
             return remitCommonGuideRepository.findFirstByOrderByIdAsc()
-                .map(RemitCommonGuide::toVoiceResponse)
+                .map(RemitCommonGuide::toRemitVoiceResponse)
                 .orElseThrow(() -> new DataNotFoundException(ErrorCode.GUIDE_NOT_FOUND));
 
+        } else if (isItem(request.getUserVoice())) {
+            return remitCommonGuideRepository.findById(3L)
+                .map(RemitCommonGuide::toItemVoiceResponse)
+                .orElseThrow(() -> new DataNotFoundException(ErrorCode.GUIDE_NOT_FOUND));
         }
         throw new DataNotFoundException(ErrorCode.GUIDE_NOT_FOUND);
     }
