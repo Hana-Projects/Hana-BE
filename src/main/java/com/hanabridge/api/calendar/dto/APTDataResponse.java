@@ -27,6 +27,7 @@ public class APTDataResponse {
     public CalendarResponse toCalendarResponse() {
         return CalendarResponse.builder()
             .houseName(this.houseName)
+            .receiptBeginDate(this.receiptBeginDate)
             .receiptEndDate(this.receiptEndDate)
             .address(this.address)
             .build();

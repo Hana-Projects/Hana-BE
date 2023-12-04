@@ -17,6 +17,8 @@ public class CalendarResponse {
     private String houseName;
     @Schema(description = "청약 만료 기간")
     private String receiptEndDate;
+    @Schema(description = "청약 시작 기간")
+    private String receiptBeginDate;
     @Schema(description = "주소")
     private String address;
 }
