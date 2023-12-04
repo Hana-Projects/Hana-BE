@@ -1,5 +1,7 @@
 package com.hanabridge.api.calendar.controller;
 
+import com.hanabridge.api.calendar.dto.CalendarDateListResponse;
+import com.hanabridge.api.calendar.dto.CalendarDateRequest;
 import com.hanabridge.api.calendar.dto.CalendarRequest;
 import com.hanabridge.api.calendar.dto.CalendarResponse;
 import com.hanabridge.api.calendar.service.CalendarService;
@@ -33,5 +35,16 @@ public class CalendarController {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(ApiSuccessResponse.success200("청약 정보 조회 성공", response));
+    }
+
+    @Operation(summary = "해당 월의 청약 여부 조회 API", description = "해당 년.월에 청약이 존재하는 날짜를 조회하는 API이다.")
+    @GetMapping("/calendar/date")
+    public ResponseEntity<ApiSuccessResponse<CalendarDateListResponse>> getSubscriptionDateInfo(
+        @ParameterObject @ModelAttribute CalendarDateRequest request) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ApiSuccessResponse.success200("해당 월의 청약 여부 조회 성공",
+                calendarService.checkSubscriptionDate(request)));
+
     }
 }
