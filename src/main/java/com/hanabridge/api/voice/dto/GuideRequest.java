@@ -22,7 +22,8 @@ public class GuideRequest {
     RemitCode remitCode;
     @Schema(description =
         "index 1 부터 시작한다. 예를 들어 돈 보낼 방법을 선택 하는 화면의 안내 index는 1이다. 송금 방법을 선택한 이후에도 index는 1씩 증가한다. "
-            + "예를 들어 계좌 목록 조회는 index 2, send 2-1 화면 index 3, send 1-1 화면 index 3")
+            + "예를 들어 계좌 목록 조회는 index 2, send 2-1 화면 index 3, send 1-1 화면 index 3"
+            + "상품가입 첫 화면은 index 1, 상품 가입 화면2는 index 2 그리고 상품 가입 화면3은 index 3이다. 즉 상품 가입 화면x의 x 값이 index 값이다. ")
     @NotNull(message = "index는 필수 값입니다.")
     Long index;
 }
