@@ -24,8 +24,8 @@ public class MessageController {
     private final TextMessageSender textMessageSender;
 
     @Operation(summary = "상품 안내 문자 메세지", description = "선택한 상품에 대한 자세한 설명을 문자로 받아보는 api이다.")
-    @Parameter(name = "itemCode",description = "상품 코드 값",example = ""
-        + "    \nHANA_ACCOUNT = 하나 주거래 통장 \n"
+    @Parameter(name = "itemCode", description = "상품 코드 값", example = ""
+        + "    \nMAIN_TRANSACTION_HANA_ACCOUNT = 하나 주거래 통장 \n"
         + "    \nWONDER_LIVING_CARD = 원더 LIVING 카드\n"
         + "    \nWONDER_FREE = 원더카드 FREE\n"
         + "    \nCHALLENGE_365_SAVINGS = 도전 365 적금\n"
