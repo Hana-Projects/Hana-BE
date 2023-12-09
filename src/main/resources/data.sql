@@ -12,7 +12,7 @@ INSERT INTO PHONE_NUMBER_ACCOUNT(ID,CUSTOMER_ID,ACCOUNT_ID) VALUES (1,2,4);
 INSERT INTO PHONE_NUMBER_ACCOUNT(ID,CUSTOMER_ID,ACCOUNT_ID) VALUES (2,3,3);
 INSERT INTO REMIT_COMMON_GUIDE(ID,GUIDE) VALUES (1,"좌측 상단의 돈 보내기 버튼을 누르세요");
 INSERT INTO REMIT_COMMON_GUIDE(ID,GUIDE) VALUES (2,"계좌와 전화번호 중 돈 보낼 방법을 선택해주세요.선택한 이후 다음 버튼을 눌러주세요");
-INSERT INTO REMIT_COMMON_GUIDE(ID,GUIDE) VALUES (3,"좌측 하단의 상품 가입 버튼을 누르세요");
+INSERT INTO REMIT_COMMON_GUIDE(ID,GUIDE) VALUES (3,"우측 하단의 상품 가입 버튼을 누르세요");
 INSERT INTO REMIT_ACCOUNT_GUIDE(ID,GUIDE) VALUES (1,"계좌 목록 중에서 계좌 하나를 선택하세요.선택한 이후 다음 버튼을 눌러주세요");
 INSERT INTO REMIT_ACCOUNT_GUIDE(ID,GUIDE) VALUES (2,"선택한 계좌가 맞는지 확인해 주세요.맞으면 돈 보내기를 눌러주시고 다른 계좌를 선택하시고 싶으시면 다른 계좌에서 돈 보내기를 눌러주세요");
 INSERT INTO REMIT_ACCOUNT_GUIDE(ID,GUIDE) VALUES (3,"보낼 계좌의 계좌번호를 상단에 계좌의 은행 정보를 하단에 입력해 주세요. 입력 후 다음 버튼을 눌러주세요.");
