@@ -1,5 +1,6 @@
 package com.hanabridge.api.global.config;
 
+import com.hanabridge.api.security.filter.JwtAuthenticationExceptionHandlerFilter;
 import com.hanabridge.api.security.filter.JwtAuthenticationFilter;
 import com.hanabridge.api.security.filter.CustomAuthenticationFilter;
 import com.hanabridge.api.security.filter.CustomAuthenticationProvider;
@@ -7,6 +8,7 @@ import com.hanabridge.api.security.handler.CustomAccessDeniedHandler;
 import com.hanabridge.api.security.handler.CustomAuthenticationEntryPoint;
 import com.hanabridge.api.security.handler.CustomAuthenticationFailureHandler;
 import com.hanabridge.api.security.handler.CustomAuthenticationSuccessHandler;
+import com.hanabridge.api.security.service.JwtService;
 import jakarta.servlet.DispatcherType;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class WebSecurityConfig {
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
     private final CustomAuthenticationProvider customAuthenticationProvider;
-
+    private final JwtService jwtService;
 
     @Bean
     @Order(1)
@@ -60,7 +62,7 @@ public class WebSecurityConfig {
                 .anyRequest().denyAll());
 
         http
-            .addFilterBefore(new JwtAuthenticationFilter(customAuthenticationProvider)
+            .addFilterBefore(new JwtAuthenticationFilter(customAuthenticationProvider, jwtService)
                 , UsernamePasswordAuthenticationFilter.class);
 
         http
