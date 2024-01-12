@@ -22,3 +22,4 @@
 
 ## Server Cloud Architecture
 
+<img width = "630" src="./img/cloud.png"/>
