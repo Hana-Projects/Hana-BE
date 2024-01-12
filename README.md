@@ -18,7 +18,7 @@
 - remove : 파일을 삭제한 경우
 
 ## Server IP 주소
-
+<img width = "630" src="./img/cloud.png"/>
 
 ## Server Cloud Architecture
 
