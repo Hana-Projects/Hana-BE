@@ -45,8 +45,4 @@ public class CustomerController {
         return ResponseEntity.ok(ApiSuccessResponse.success200("로그인 성공"));
     }
 
-    @PostMapping("/api/test")
-    public String test(){
-        return "test";
-    }
 }
