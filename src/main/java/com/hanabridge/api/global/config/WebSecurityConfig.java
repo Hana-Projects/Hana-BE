@@ -64,6 +64,10 @@ public class WebSecurityConfig {
                 , UsernamePasswordAuthenticationFilter.class);
 
         http
+            .addFilterBefore(new JwtAuthenticationExceptionHandlerFilter(),
+                JwtAuthenticationFilter.class);
+
+        http
             .exceptionHandling((exceptionHandling) ->
                 exceptionHandling.authenticationEntryPoint(customAuthenticationEntryPoint)
                     .accessDeniedHandler(customAccessDeniedHandler));
