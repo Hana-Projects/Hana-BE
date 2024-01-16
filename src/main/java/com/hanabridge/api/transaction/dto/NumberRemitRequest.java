@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NumberRemitRequest {
 
-    @Schema(description = "입금(돈을 받는) 고객 계좌 번호")
+    @Schema(description = "입금(돈을 받는) 고객 계좌 번호(아무 값 허용)")
     private String toAccountNumber;
-    @Schema(description = "출금(돈을 보내는) 계좌의 id(primary key)값")
+    @Schema(description = "출금(돈이 나가는) 계좌의 id(primary key)값")
     private Long accountId;
     @Schema(description = "송금하는 금액")
     private Long amount;

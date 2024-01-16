@@ -44,9 +44,9 @@ public class TransactionService {
             .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
             .withdraw(request.getAmount());
         //입금
-        accountRepository.findByAccountNumber(request.getAccountNumber())
-            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
-            .deposit(request.getAmount());
+//        accountRepository.findByAccountNumber(request.getAccountNumber())
+//            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
+//            .deposit(request.getAmount());
 
     }
 
@@ -64,9 +64,9 @@ public class TransactionService {
             .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
             .withdraw(request.getAmount());
         //입금
-        accountRepository.findByAccountNumber(request.getToAccountNumber())
-            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
-            .deposit(request.getAmount());
+//        accountRepository.findByAccountNumber(request.getToAccountNumber())
+//            .orElseThrow(() -> new DataNotFoundException(ErrorCode.ACCOUNT_NOT_FOUND))
+//            .deposit(request.getAmount());
 
     }
 

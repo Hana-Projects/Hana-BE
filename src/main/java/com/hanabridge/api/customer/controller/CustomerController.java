@@ -44,4 +44,5 @@ public class CustomerController {
     public ResponseEntity<ApiSuccessResponse<Void>> login(){
         return ResponseEntity.ok(ApiSuccessResponse.success200("로그인 성공"));
     }
+
 }
